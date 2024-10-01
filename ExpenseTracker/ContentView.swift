@@ -16,6 +16,8 @@ struct ContentView: View {
                     Text("OverView")
                         .font(.title2)
                         .bold()
+                    
+                    RecentTransactionList()
 
                 }
                 .padding()
@@ -37,7 +39,17 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-  
+struct ContentView_Previews: PreviewProvider {
+    static let transactionListVM: TranscationListViewModel = {
+        let transactionListVM = TranscationListViewModel()
+        transactionListVM.transcations = transcationListPreviewData
+        return transactionListVM
+    } ()
+    
+    static var previews: some View {
+        Group {
+            ContentView()
+        }
+        .environmentObject(transactionListVM)
+    }
 }
